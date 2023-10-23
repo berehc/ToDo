@@ -2,10 +2,9 @@
 {
     internal class Program
     {
-        public static List<string> TaskList {get ;set;}
+        public static List<string> TaskList {get ;set;} = new List<string>();
         static void Main(string[] args)
         {
-            TaskList = new List<string>();
             int menuSelected = 0;
             do
             {
@@ -61,7 +60,7 @@
                 {
                     string taskToRemove = TaskList[indexToRemove];
                     TaskList.RemoveAt(indexToRemove);
-                    Console.WriteLine("Tarea " + taskToRemove + " eliminada");
+                    Console.WriteLine($"Tarea {taskToRemove} eliminada");
                 }
             }
             catch (Exception ex)
@@ -87,17 +86,17 @@
 
         public static void ShowMenuTaskList()
         {
-            if (TaskList == null || TaskList.Count == 0)
-            {
-                Console.WriteLine("No hay tareas por realizar");
-            }
-            else
+            if (TaskList?.Count > 0)
             {
                 Console.WriteLine("----------------------------------------");
                 var indexTask = 1;
-                TaskList.ForEach(task => Console.WriteLine((indexTask++) + ". " + task));
+                TaskList.ForEach(task => Console.WriteLine($"{indexTask++} . {task}"));
 
                 Console.WriteLine("----------------------------------------");
+            }
+            else
+            {
+                Console.WriteLine("No hay tareas por realizar");
             }
         }
     }
